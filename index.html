@@ -24,31 +24,6 @@
 </head>
 <body>
 
-    <video id="videoPlayer" controls></video>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const video = document.getElementById("videoPlayer");
-            const streamURL = "https://live-api.vimeocdn.com/sessions/b4f5dd76-ebd1-4922-8c36-760d38b536a8/playlist/hls.m3u8?cdn=akamai-fmp4&json=1&~exp=1738504800&~id=player&~sig=2KJvSrPD5woBqKuOcqM0iW_JAB98nwe0XmcdbpgqG54";
-
-            const player = new Plyr(video, {
-                controls: ["play", "progress", "current-time", "mute", "volume", "fullscreen"],
-                autoplay: true
-            });
-
-            if (Hls.isSupported()) {
-                const hls = new Hls();
-                hls.loadSource(streamURL);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    video.play();
-                });
-            } else if (video.canPlayType("application/x-mpegURL")) {
-                video.src = streamURL;
-                video.play();
-            }
-        });
-    </script>
-
+   <iframe src="https://vimeo.com/event/4867438/embed" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
 </body>
 </html>
