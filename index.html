@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HLS Player</title>
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <title>Vimeo HLS Player</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.0"></script>
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <style>
@@ -29,7 +29,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const video = document.getElementById("videoPlayer");
-            const streamURL = "https://live-api.vimeocdn.com/sessions/b4f5dd76-ebd1-4922-8c36-760d38b536a8/playlist/hls.m3u8";
+            const streamURL = "https://live-api.vimeocdn.com/sessions/b4f5dd76-ebd1-4922-8c36-760d38b536a8/playlist/hls.m3u8?cdn=akamai-fmp4&json=1&~exp=1738504800&~id=player&~sig=2KJvSrPD5woBqKuOcqM0iW_JAB98nwe0XmcdbpgqG54";
 
             const player = new Plyr(video, {
                 controls: ["play", "progress", "current-time", "mute", "volume", "fullscreen"],
@@ -40,8 +40,12 @@
                 const hls = new Hls();
                 hls.loadSource(streamURL);
                 hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    video.play();
+                });
             } else if (video.canPlayType("application/x-mpegURL")) {
                 video.src = streamURL;
+                video.play();
             }
         });
     </script>
